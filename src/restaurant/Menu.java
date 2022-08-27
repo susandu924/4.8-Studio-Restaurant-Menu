@@ -5,30 +5,60 @@ import java.util.Date;
 
 public class Menu {
 
-            private Date lastUpdated;
-            private ArrayList<MenuItem> items;
+    private ArrayList<MenuItem> menuItems = new ArrayList<>();
 
-            public Menu(Date d, ArrayList<MenuItem> i) {
-                this.lastUpdated = d;
-                this.items = i;
+    private Date lastUpdated;
+
+            public Menu(){
+//                this.menuItems = menuItems; CONSTRUCTOR since this sob wont let me make a comment @ line 11,!@#$*&^wonky mess
+                this.lastUpdated = new Date();
             }
 
-            public void setLastUpdated(Date lastUpdated) {
-                this.lastUpdated = lastUpdated;
+            public ArrayList<MenuItem>getMenuItems() {
+                return this.menuItems;
             }
-
-            public void setItems(ArrayList<MenuItem> items) {
-                this.items = items;
+            public  void setMenuItems(ArrayList<MenuItem>menuItems){
+                this.menuItems = menuItems;
             }
 
             public Date getLastUpdated() {
-                return lastUpdated;
+                return this.lastUpdated;
             }
 
-            public ArrayList<MenuItem> getItems() {
-                return items;
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public void addMenuItem(MenuItem item) {
+
+//                loop through each item, in menuitemslist, if we find a match, display a warning, dont add to list
+        for(MenuItem menuItem: this.menuItems)
+            if(item.equals(menuItem)) {
+                System.out.println("WARNING: This item already exists!");
+                return;
             }
+
+                this.menuItems.add(item);
+                this.lastUpdated = new Date();
+            }
+
+            public void removeMenuItem(MenuItem item){
+                this.menuItems.remove(item);
+
+                this.lastUpdated = new Date();
+            }
+
+    @Override
+    public String toString() {
+                String returnString ="";
+//                lop through each menu item
+        for (MenuItem item: this.menuItems){
+            returnString += item.toString() + "\n\n";
+
         }
+        return returnString;
+    }
+}
 
 
 
